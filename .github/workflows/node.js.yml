@@ -23,8 +23,8 @@ jobs:
 
       - name: npm install
         run: |
-          npm install -g hexo-cli
-          npm install
+          sudo npm install -g hexo-cli
+          cd src && npm install
       - name: Build
         run: |
           cd src && hexo genereate
