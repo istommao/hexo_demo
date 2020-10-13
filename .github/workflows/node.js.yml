@@ -1,0 +1,31 @@
+# workflow name
+name: Hexo Blog CI
+
+# main branch on push, auto run
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install and Build
+      run: |
+        npm install hexo-cli -g
+        npm install
+        cd src && hexo genereate
+
+    - name: Deploy to ecs server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+        ARGS: "-rltgoDzvO --delete"
+        SOURCE: "./src/public"
+        REMOTE_HOST: ${{ secrets.SSH_HOST }}
+        REMOTE_USER: "root"
+        TARGET: "/data/hexo/"
