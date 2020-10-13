@@ -14,7 +14,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Install and Build
+
+    - name: Use Node.js 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: "10.x"
       run: |
         npm install hexo-cli
         npm install
