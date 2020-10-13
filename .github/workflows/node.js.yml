@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - src/*
 
 jobs:
   build:
@@ -16,7 +14,8 @@ jobs:
       # 切换分支
       - name: Checkout
         uses: actions/checkout@main
-        path: 'src'
+        with: 
+          path: "src"
 
       # 使用 node:10
       - name: use Node.js 10
