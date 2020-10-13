@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Install and Build
       run: |
-        npm install hexo-cli -g
+        npm install hexo-cli
         npm install
         cd src && hexo genereate
 
