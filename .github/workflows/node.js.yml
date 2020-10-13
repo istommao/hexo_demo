@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/*
 
 jobs:
   build:
@@ -14,6 +16,7 @@ jobs:
       # 切换分支
       - name: Checkout
         uses: actions/checkout@main
+        path: 'src'
 
       # 使用 node:10
       - name: use Node.js 10
@@ -24,17 +27,17 @@ jobs:
       - name: npm install
         run: |
           sudo npm install -g hexo-cli
-          cd src && npm install
+          npm install
       - name: Build
         run: |
-          cd src && hexo genereate
+          hexo genereate
 
       - name: Deploy to ecs server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: $GITHUB_ACTION_PATH/src/public/
+          SOURCE: "./"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: "root"
           TARGET: "/data/hexo/"
