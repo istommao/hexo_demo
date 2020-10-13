@@ -20,12 +20,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10
-      # npm install
+
       - name: npm install and build
-      run: |
-        npm install hexo-cli
-        npm install
-        cd src && hexo genereate
+        run: |
+          npm install hexo-cli
+          npm install
+          cd src && hexo genereate
 
       - name: Deploy to ecs server
         uses: easingthemes/ssh-deploy@v2.1.5
