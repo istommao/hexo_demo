@@ -21,6 +21,7 @@ jobs:
         npm install
         cd src && hexo genereate
 
+    steps:
     - name: Deploy to ecs server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
