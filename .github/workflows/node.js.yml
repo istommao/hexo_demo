@@ -21,10 +21,12 @@ jobs:
         with:
           node-version: 10
 
-      - name: npm install and build
+      - name: npm install
         run: |
-          npm install hexo-cli
+          npm install -g hexo-cli
           npm install
+      - name: Build
+        run: |
           cd src && hexo genereate
 
       - name: Deploy to ecs server
