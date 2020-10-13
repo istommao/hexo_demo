@@ -14,8 +14,6 @@ jobs:
       # 切换分支
       - name: Checkout
         uses: actions/checkout@main
-        with: 
-          path: "src"
 
       # 使用 node:10
       - name: use Node.js 10
@@ -26,7 +24,7 @@ jobs:
       - name: npm install
         run: |
           sudo npm install -g hexo-cli
-          npm install
+          cd src && npm install
       - name: Build
         run: |
           cd src && hexo genereate
